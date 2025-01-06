@@ -1,9 +1,0 @@
-{
-  "app": "Tiny Tapeout tt10 d89635e1",
-  "repo": "https://github.com/htfab/tt10-verilog-example",
-  "commit": "551801c66bd9a5e1eb24e1b3c6e2cccbd1b6fccf",
-  "workflow_url": "https://github.com/htfab/tt10-verilog-example/actions/runs/12626929231",
-  "sort_id": 1736137229608,
-  "openlane_version": "OpenLane2 2.2.9",
-  "pdk_version": "open_pdks 0fe599b2afb6708d281543108caf8310912f54af"
-}
