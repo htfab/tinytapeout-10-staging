@@ -67,6 +67,13 @@ jobs:
           pdk_version: ${{ env.SKY130_PDK_VERSION }}
           pdk_root: ${{ env.PDK_ROOT }}
 
+      - name: Install KLayout
+        shell: bash
+        run: |
+          wget https://github.com/htfab/klayout/releases/download/v0.29.10/klayout_0.29.10-1_amd64.deb
+          sudo apt-get install -y ./klayout_0.29.10-1_amd64.deb
+          pip install klayout==0.29.10
+
       # Patch all digital projects to work around the poly density issue
       - name: Patch projects for poly density issue
         working-directory: projects
@@ -83,6 +90,10 @@ jobs:
 
             if [ -f $project/$project.gds.br ]; then
               brotli -jd $project/$project.gds.br
+            fi
+
+            if [ -f $project/$project.oas ]; then
+              strm2gds $project/$project.oas $project/$project.gds
             fi
             
             python ../sky130_density_fix/replace_decap.py --design $project --user-gds $project/$project.gds --replacement-gds ../sky130_density_fix/sky130_ef_sc_hd__newfill_12.gds | tee -a ../tt-multiplexer/ol2/tt_top/gds/replace_decap.log
